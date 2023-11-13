@@ -1,0 +1,80 @@
+.header {
+  background-color: #3a3a3a;
+  height: 253px;
+  position: relative;
+  width: 100%;
+}
+
+.header .filter {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-color: #000000;
+  border-top-style: solid;
+  border-top-width: 1px;
+  height: 71px;
+  margin-left: 10%;
+  margin-right: 10%;
+  overflow: hidden;
+  position: absolute;
+  top: 150px;
+  width: 80%;
+}
+
+.header .frame {
+  background-color: #ffffff;
+  border-radius: 10px;
+  height: 36px;
+  left: 17px;
+  position: absolute;
+  top: 17px;
+  width: 202px;
+}
+
+.header .div {
+  background-color: #ffffff;
+  border-radius: 10px;
+  height: 36px;
+  left: 319px;
+  position: absolute;
+  top: 17px;
+  width: 202px;
+}
+
+.header .frame-2 {
+  background-color: #ffffff;
+  border-radius: 10px;
+  height: 36px;
+  left: 621px;
+  position: absolute;
+  top: 17px;
+  width: 202px;
+}
+
+.header .frame-3 {
+  background-color: #ffffff;
+  border-radius: 10px;
+  height: 36px;
+  left: 923px;
+  position: absolute;
+  top: 17px;
+  width: 202px;
+}
+
+.header .frame-4 {
+  background-color: #ffffff;
+  border-radius: 10px;
+  height: 36px;
+  left: 1225px;
+  position: absolute;
+  top: 17px;
+  width: 202px;
+}
+
+.header .image {
+  height: 53px;
+  left: 1312px;
+  object-fit: cover;
+  position: absolute;
+  top: 48px;
+  width: 53px;
+}
