@@ -1,60 +1,32 @@
 .display-all {
   height: 143px;
-  position: relative;
-  width: 1345px;
-  display: flex;
+  position: absolute;
+  width: 100%;
   margin: 3%;
 }
 
-.display-all .article-instance {
-  left: 1px !important;
-  position: absolute !important;
-  top: 1px !important;
-}
-
-.display-all .design-component-instance-node {
-  left: 363px !important;
-  position: absolute !important;
-  top: 1px !important;
-}
-
-.display-all .article-2 {
-  left: 725px !important;
-  position: absolute !important;
-  top: 1px !important;
-}
-
-.display-all .article-3 {
-  left: 1086px !important;
-  position: absolute !important;
-  top: 0 !important;
-}
 .display-all {
   height: 143px;
-  position: relative;
+  position: absolute;
   width: 1345px;
 }
-
-.display-all .article-instance {
-  left: 1px !important;
-  position: absolute !important;
-  top: 1px !important;
+.articles {
+  height: 143px;
+  position: absolute;
+  width: 100%;
+  display: flex;
+  margin-left: 10%;
 }
 
-.display-all .design-component-instance-node {
-  left: 363px !important;
-  position: absolute !important;
-  top: 1px !important;
+button {
+  position: absolute;
 }
 
-.display-all .article-2 {
-  left: 725px !important;
-  position: absolute !important;
-  top: 1px !important;
+.button2 {
+  position: absolute;
+  left: 100%;
 }
-
-.display-all .article-3 {
-  left: 1086px !important;
-  position: absolute !important;
-  top: 0 !important;
+.button3 {
+  position: relative;
+  left: 30%;
 }

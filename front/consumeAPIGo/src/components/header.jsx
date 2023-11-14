@@ -10,7 +10,6 @@ export const Header = () => {
         <div className="frame-3" />
         <div className="frame-4" />
       </div>
-      <img className="image" alt="Image" src="image-1.png" />
     </div>
   );
 };

@@ -81,8 +81,13 @@ func SearchArticlesHandler(w http.ResponseWriter, r *http.Request) {
 	// Implementation for search articles
 	// ...
 }
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+}
 
 func GetArticlesHandler(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+
 	// Retrieve query parameters (e.g., page, filter) from the request
 	params := r.URL.Query()
 	pageStr := params.Get("page")
@@ -134,6 +139,8 @@ func GetArticlesHandler(w http.ResponseWriter, r *http.Request) {
 
 // GetArticleHandler handles the get article endpoint
 func GetArticleHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
 	// Extract the article ID from the URL parameters
 	vars := mux.Vars(r)
 	articleIDStr := vars["article_id"]
@@ -168,6 +175,9 @@ func GetArticleHandler(w http.ResponseWriter, r *http.Request) {
 
 // PostArticleHandler handles the post article endpoint
 func PostArticleHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", r.Header.Get("Origin"))
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 	// Parse the request body to get the Article data
 	var article Article
 	err := json.NewDecoder(r.Body).Decode(&article)
@@ -175,7 +185,6 @@ func PostArticleHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid request body", http.StatusBadRequest)
 		return
 	}
-
 	// Insert the new article into the database
 	result, err := db.Exec("INSERT INTO Article(title, slug, content, author) VALUES(?, ?, ?, ?)",
 		article.Title, article.Slug, article.Content, article.Author)
@@ -201,6 +210,8 @@ func PostArticleHandler(w http.ResponseWriter, r *http.Request) {
 
 // PutArticleHandler handles the put article endpoint
 func PutArticleHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
 	// Extract the article ID from the URL parameters
 	vars := mux.Vars(r)
 	articleIDStr := vars["article_id"]
@@ -236,6 +247,9 @@ func PutArticleHandler(w http.ResponseWriter, r *http.Request) {
 
 // DeleteArticleHandler handles the delete article endpoint
 func DeleteArticleHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
 	// Extract the article ID from the URL parameters
 	vars := mux.Vars(r)
 	articleIDStr := vars["article_id"]
@@ -260,6 +274,8 @@ func DeleteArticleHandler(w http.ResponseWriter, r *http.Request) {
 
 // GetCommentsHandler handles the get comments endpoint
 func GetCommentsHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
 	// Extract the article ID from the URL parameters
 	vars := mux.Vars(r)
 	articleIDStr := vars["article_id"]
@@ -296,6 +312,8 @@ func GetCommentsHandler(w http.ResponseWriter, r *http.Request) {
 
 // PostCommentHandler handles the post comment endpoint
 func PostCommentHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
 	// Extract the article ID from the URL parameters
 	vars := mux.Vars(r)
 	articleIDStr := vars["article_id"]
@@ -340,6 +358,7 @@ func PostCommentHandler(w http.ResponseWriter, r *http.Request) {
 
 // jsonResponse writes a JSON response to the given http.ResponseWriter
 func jsonResponse(w http.ResponseWriter, data interface{}) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(data)

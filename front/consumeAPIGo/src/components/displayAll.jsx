@@ -3,51 +3,52 @@ import { Article } from "./articles.jsx";
 import "../styles/displayAll.css";
 
 export const DisplayAll = () => {
-  const [rows, setRows] = useState([]);
+  const [rows, setRows] = React.useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
 
   const pageLimit = (page) => {
     if (page < 1) {
-      return 1;
+      setPage(1);
     }
     return page;
   };
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:8080/v1/articles?page=${pageLimit(page)}`
-      );
-      if (!response.ok) {
-        throw new Error(`Network response was not ok: ${response.statusText}`);
-      }
-      const json = await response.json();
-      setRows(json || []);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchData(); // Appeler la fonction fetchData immédiatement après le montage du composant
+    setLoading(true);
+    fetch(`http://localhost:8080/v1/articles?page=${pageLimit(page)}`)
+      .then((data) => data.json())
+      .then((json) => setRows(json || []))
+      .then(() => setLoading(false));
   }, [page]);
 
+  console.log("rows", rows);
   if (loading) {
-    return <p>Loading...</p>; // Vous pouvez remplacer cela par un indicateur de chargement plus sophistiqué si nécessaire
+    return <p>Loading...</p>;
   }
 
   return (
     <div className="display-all">
-      <button onClick={() => setPage(page - 1)}>Previous</button>
+      <button className="button1" onClick={() => setPage(page - 1)}>
+        Previous
+      </button>
       <div className="articles">
-        {rows.map((row) => (
-          <Article key={row.id} {...row} />
-        ))}
+        {rows.articles.map((row, key) => {
+          return (
+            <div className="article" key={key}>
+              <Article
+                title={row.title}
+                content={row.content}
+                author={row.author}
+                id={row.article_id}
+              />
+            </div>
+          );
+        })}
       </div>
-      <button onClick={() => setPage(page + 1)}>Next</button>
+      <button className="button2" onClick={() => setPage(page + 1)}>
+        Next
+      </button>
     </div>
   );
 };
